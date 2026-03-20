@@ -1,0 +1,225 @@
+
+@use "variable" as *;
+.hero-slider {
+  height: 100vh;
+  position: relative;
+}
+
+.swiper {
+  height: 100%;
+}
+
+.swiper-slide {
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+
+
+.overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.4);
+  top: 0;
+  left: 0;
+}
+
+/* Content */
+.content {
+  position: absolute;
+  top: 50%;
+  left: 10%;
+  color: #fff;
+  max-width: 800px;
+  transform: translateY(-50%);
+}
+
+.content h1 {
+  font-size: 60px;
+  line-height: 1.2;
+  margin: 0 0 10px;
+}
+
+.content p {
+  font-size: 20px;
+}
+
+/* Bottom Center Arrows */
+.nav-wrapper {
+  position: absolute;
+  bottom: 50%;
+  right: 100px;
+  transform: translateY(-50%);
+  display: flex;
+  gap: 20px;
+  z-index: 2;
+}
+.hero-slider .swiper-button-prev{
+    display: none;
+}
+
+/* Arrow Style */
+.swiper-button-prev,
+.swiper-button-next {
+ position: relative;
+  width: 100px;
+  height: 100px;
+  border: 1px solid #ffffff8c;
+  border-radius: 50%;
+  color: #000;
+  left: 0;
+  background: rgba(255,255,255,1);
+  backdrop-filter: blur(10px);
+}
+
+.swiper-button-prev::after,
+.swiper-button-next::after {
+  font-size: 25px;
+}
+/* Initial hidden state */
+.content h1,
+.content p,.button_primary {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 0.8s ease;
+}
+
+/* Active slide animation */
+.swiper-slide-active .content h1 {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.3s;
+}
+
+.swiper-slide-active .content p {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.6s;
+  margin-bottom: 20px;
+}
+.swiper-slide-active .button_primary{
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 1s;
+}
+.content h1 {
+  transition: all 0.9s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.content p {
+  transition: all 1s cubic-bezier(0.25, 1, 0.5, 1);
+}
+.swiper-slide-active .button_primary{
+  transition: all 1s cubic-bezier(0.25, 1, 0.5, 1);
+}
+.categories-bar {
+      position: absolute;
+      bottom: 0;
+      z-index: 2;
+      background:rgba(255, 255, 255, 0.35);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255,255,255,0.28);
+      border-radius: 0;
+      padding: 20px 40px;
+      display: flex;
+      align-items: center;
+      width: 100%;
+      gap: 48px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.35);
+      justify-content: space-between;
+    }
+
+    .category {
+      color: #fff;
+      font-size: 1.18rem;
+      font-weight: 500;
+      text-decoration: none;
+      position: relative;
+      padding: 10px 0;
+      transition: all 0.25s ease;
+      white-space: nowrap;
+      width: 25%;
+        display: flex;
+        justify-content: space-between
+    }
+
+    .category:hover {
+      color: white;
+      transform: translateY(-2px);
+    }
+
+    .category::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      bottom: 0;
+      left: 50%;
+      background: $accent;
+      transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+      transform: translateX(-50%);
+    }
+
+    .category:hover::after {
+      width: 100%;
+    }
+
+    .plus {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: 1.5px solid rgba(255,255,255,0.25);
+      color: #fff;
+      font-size: 1.4rem;
+      display: grid;
+      place-items: center;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    .plus:hover {
+      background: rgba(255,255,255,0.12);
+      color: white;
+      border-color: rgba(255,255,255,0.45);
+      transform: rotate(90deg);
+    }
+
+    @media (max-width: 860px) {
+      .categories-bar {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 32px 48px;
+        padding: 28px;
+        border-radius: 16px;
+      }
+      .swiper-slide .content{
+        top: 150px;
+        transform: none;
+      }
+      .swiper-slide .content h1{
+        font-size: 30px;
+      }
+      .hero-slider{
+        height: 700px;
+        min-height: 400px;
+      }
+      .nav-wrapper {
+	position: relative;
+	bottom: 0;
+	right: 0;
+	transform: none;
+	display: flex;
+	gap: 20px;
+	z-index: 2;
+	left: 50px;
+}
+.categories-bar{
+  gap: 15px;
+  border-radius: 0;
+}
+.category{
+  width: 45%;
+}
+    }

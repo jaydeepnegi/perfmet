@@ -1,0 +1,120 @@
+@use "variable" as *;
+@import url('https://fonts.googleapis.com/css2?family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&display=swap');
+html{
+    scroll-behavior: smooth;
+    font-size: 16px;
+}
+body{
+    font-family: 'Google Sans', sans-serif;
+   font-size:1rem ;
+   line-height: 1.5;
+}
+
+.button_color-primary{
+    background-color: #304ca0;
+    color: #fff;
+}
+.button_content__6Zh3n {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.4rem;
+  overflow: hidden;
+}
+.button_primary{
+    @include button-base;
+    border: 0;
+    
+    cursor: pointer;
+    svg{
+        width: 24px;
+        height: 24px;
+    }
+    & .button_content{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 1.4rem;
+        overflow: hidden;
+        position: relative;
+    }
+    & .button_button-round-text span::after {
+  content: attr(data-text);
+  display: block;
+  position: absolute;
+  top: 105%;
+  left: 0;
+  right: 0;
+}
+
+}
+.img-thumb{
+    position: relative;
+    overflow: hidden;
+}
+.ration-16x9{
+    aspect-ratio: 16/9;
+}
+.img-thumb img{
+    display: block;
+    object-fit: 100%;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+.section-title{
+    margin:0 0 16px;
+    font-weight:700;
+    font-size:clamp(24px,3vw,45px);
+}
+.head-wrap {
+	display: flex;
+	align-items: center;
+    gap: 20px;
+}
+.head-wrap.center{
+    justify-content: center;
+}
+
+
+  .logo-container {
+      display: inline-block;
+      line-height: 0;
+    }
+
+    /* ── Keyframes (global, shared by all instances) ── */
+    @keyframes logo-slideIn {
+      from { opacity: 0; transform: translateX(-50px); }
+      to   { opacity: 1; transform: translateX(0); }
+    }
+    @keyframes logo-popIn {
+      from { opacity: 0; transform: scale(0); }
+      60%  { transform: scale(1.12); }
+      to   { opacity: 1; transform: scale(1); }
+    }
+    @keyframes logo-pulse {
+      0%   { transform: scale(1);    opacity: 0.7; }
+      100% { transform: scale(1.35); opacity: 0; }
+    }
+    @keyframes logo-dotPop {
+      from { opacity: 0; transform: scale(0); }
+      65%  { opacity: 1; transform: scale(1.35); }
+      to   { opacity: 1; transform: scale(1); }
+    }
+    @keyframes logo-floatY {
+      0%, 100% { transform: translateY(0px); }
+      50%      { transform: translateY(-7px); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .logo-body, .logo-blue, .logo-ring, .logo-dot {
+        animation: none !important;
+        opacity: 1 !important;
+        transform: none !important;
+      }
+    }
+    .lets-connect {
+	border-top: 1px solid;
+	margin-top: 90px;
+	padding-top: 90px;
+}

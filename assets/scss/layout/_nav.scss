@@ -1,0 +1,612 @@
+@use "variable" as *;
+
+
+// ══════════════════════════════════════════════════════
+// MIXINS
+// ══════════════════════════════════════════════════════
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+}
+
+// Shared base for L1 nav-trigger and nav-link
+@mixin nav-text-base {
+  font-size: 14px;
+  font-weight: 500;
+  white-space: nowrap;
+  cursor: pointer;
+  color: $text-black;
+  transition: color .18s;
+}
+
+// Dropdown visible state
+@mixin dropdown-open {
+  opacity: 1;
+  pointer-events: all;
+}
+
+// Resets absolute dropdown to static accordion (mobile)
+@mixin accordion-reset {
+  position: static;
+  transform: none;
+  opacity: 1;
+  pointer-events: all;
+  box-shadow: none;
+  border: none;
+  border-radius: 0;
+  padding: 0;
+  max-height: 0;
+  overflow: hidden;
+}
+
+
+// ══════════════════════════════════════════════════════
+// SHELL
+// ══════════════════════════════════════════════════════
+nav {
+  background: $bg-white;
+  border-bottom: 1px solid $nav-border;
+  position: relative;
+  z-index: 1000;
+}
+
+.nav-inner {
+  @include flex-center;
+  padding: 0 28px;
+  height: 58px;
+}
+
+
+// ══════════════════════════════════════════════════════
+// LOGO
+// ══════════════════════════════════════════════════════
+.logo {
+  @include flex-center;
+  font-size: 18px;
+  font-weight: 600;
+  color: $text;
+  letter-spacing: -.5px;
+  margin-right: 32px;
+  flex-shrink: 0;
+  gap: 8px;
+  cursor: pointer;
+}
+
+
+// ══════════════════════════════════════════════════════
+// HAMBURGER
+// <li class="hamburger"> inside <ul class="hamburger-wrap">
+// Visibility is toggled by JS (display:block on mobile)
+// No <button> tag used
+// ══════════════════════════════════════════════════════
+.hamburger-wrap {
+  display: none; // JS sets display:block on mobile
+  list-style: none;
+}
+
+.hamburger {
+  @include flex-center;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  border-radius: 8px;
+  border: 1px solid $drop-border;
+  list-style: none;
+  flex-shrink: 0;
+  transition: background .15s;
+
+  &:hover {
+    background: $hover-bg;
+  }
+
+  span {
+    display: block;
+    width: 18px;
+    height: 1.5px;
+    background: $nav-bg;
+    border-radius: 2px;
+    transition: transform .3s ease, opacity .2s, width .2s;
+  }
+
+  // X state when drawer is open
+  &.open {
+    span:nth-child(1) {
+      transform: translateY(6.5px) rotate(45deg);
+      background: $text;
+    }
+
+    span:nth-child(2) {
+      opacity: 0;
+      width: 0;
+    }
+
+    span:nth-child(3) {
+      transform: translateY(-6.5px) rotate(-45deg);
+      background: $text;
+    }
+  }
+}
+
+
+// ══════════════════════════════════════════════════════
+// NAV LIST & RIGHT
+// ══════════════════════════════════════════════════════
+.nav-list {
+  display: flex;
+  align-items: stretch;
+  list-style: none;
+  height: 58px;
+  flex: 1;
+}
+
+.nav-right {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+
+// ══════════════════════════════════════════════════════
+// LEVEL 1 — nav items
+// ══════════════════════════════════════════════════════
+.nav-item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  list-style: none;
+
+  &:hover,
+  &.open {
+    // Highlight L1 trigger
+    > .nav-trigger {
+      color: $text-black;
+      border-bottom-color: $accent;
+
+      .caret {
+        transform: rotate(-180deg);
+        opacity: 1;
+      }
+    }
+
+    // Reveal L2 dropdown
+    > .dropdown {
+      @include dropdown-open;
+      transform: translateY(0) scale(1);
+    }
+  }
+}
+
+// L1 trigger — <span> inside <li>, NOT a link or button
+.nav-trigger {
+  @include flex-center;
+  @include nav-text-base;
+  gap: 5px;
+  padding: 0 14px;
+  height: 100%;
+  user-select: none;
+  font-family: $font-nav;
+}
+
+// L1 plain link — <a> for leaf items (e.g. Pricing)
+.nav-link {
+  @include flex-center;
+  @include nav-text-base;
+  gap: 5px;
+  padding: 0 14px;
+  height: 100%;
+  text-decoration: none;
+
+  &:hover {
+    color: $text-black;
+
+  }
+}
+
+// Dropdown caret
+.caret {
+  width: 0;
+  height: 0;
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+  border-top: 5px solid currentColor;
+  transition: transform .25s ease, opacity .18s;
+  flex-shrink: 0;
+  pointer-events: none;
+}
+
+
+// ══════════════════════════════════════════════════════
+// DROPDOWNS — shared base (L2 and L3)
+// ══════════════════════════════════════════════════════
+.dropdown {
+  position: absolute;
+  top: calc(100%);
+  left: 0;
+  min-width: 224px;
+  background: $accent;
+  border: 1px solid $drop-border;
+  border-radius: 10px;
+  padding: 6px;
+  list-style: none;
+  opacity: 0;
+  transform: translateY(-8px) scale(.97);
+  pointer-events: none;
+  transition: opacity .2s ease, transform .22s $transition-spring;
+  box-shadow: 0 16px 40px $dropdown-shadow;
+}
+
+
+// ══════════════════════════════════════════════════════
+// LEVEL 2 — sub items
+// ══════════════════════════════════════════════════════
+.sub-item {
+  position: relative;
+  list-style: none;
+
+  &:hover,
+  &.open {
+    // Highlight L2 link
+    > .sub-link {
+      background: $hover-bg;
+      color: $text;
+
+      .arrow-r {
+        opacity: .9;
+        transform: translateX(2px);
+      }
+    }
+
+    // Reveal L3 dropdown
+    > .dropdown {
+      @include dropdown-open;
+      transform: translateX(0) scale(1);
+    }
+  }
+
+  // L3 dropdown — shifts right of parent L2 item
+  > .dropdown {
+    top: -6px;
+    left: calc(100% + 8px);
+    min-width: 200px;
+    transform: translateX(-6px) scale(.97);
+  }
+}
+
+// L2 & L3 link row
+// <a> for leaf nodes, <a data-toggle="l2"> for L2 parents
+.sub-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 9px 12px;
+  color: $sub-link-color;
+  font-size: 13px;
+  font-weight: 400;
+  text-decoration: none;
+  border-radius: 7px;
+  cursor: pointer;
+  transition: background .14s, color .14s;
+  user-select: none;
+}
+
+// Icon chip
+.sub-icon {
+  width: 26px;
+  height: 26px;
+  border-radius: 6px;
+  background: $sub-icon-bg;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  flex-shrink: 0;
+  color: $accent;
+}
+
+.sub-info  { flex: 1; }
+.sub-title { font-size: 13px; font-weight: 500; }
+.sub-desc  { font-size: 11px; color: $muted; margin-top: 1px; }
+
+// Right arrow — desktop flyout indicator, flips to down chevron on mobile
+.arrow-r {
+  width: 0;
+  height: 0;
+  border-top: 4px solid transparent;
+  border-bottom: 4px solid transparent;
+  border-left: 5px solid currentColor;
+  opacity: .35;
+  margin-left: auto;
+  transition: opacity .15s, transform .18s;
+  flex-shrink: 0;
+  pointer-events: none;
+}
+
+
+// ══════════════════════════════════════════════════════
+// UTILITIES
+// ══════════════════════════════════════════════════════
+.sep {
+  height: 1px;
+  background: $drop-border;
+  margin: 4px 6px;
+  list-style: none;
+}
+
+.badge {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: .04em;
+  padding: 2px 7px;
+  border-radius: 20px;
+  background: $badge-bg;
+  color: $accent;
+  flex-shrink: 0;
+  margin-left: auto;
+}
+
+
+// ══════════════════════════════════════════════════════
+// BUTTONS — CTA only (Login / Get Started)
+// Not used for nav toggles — those are <li> + <span>/<a>
+// ══════════════════════════════════════════════════════
+.btn-ghost {
+  padding: 7px 16px;
+  border-radius: 7px;
+  border: 1px solid $drop-border;
+  background: transparent;
+  color: $text-primary-clr;
+  font-size: 13px;
+  font-weight: 500;
+  font-family: $font-nav;
+  cursor: pointer;
+  transition: background .15s, color .15s;
+  white-space: nowrap;display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.btn-fill {
+  padding: 7px 18px;
+  border-radius: 7px;
+  border: none;
+  background: $accent;
+  color: $white;
+  font-size: 13px;
+  font-weight: 600;
+  font-family: $font-nav;
+  cursor: pointer;
+  transition: opacity .15s;
+  white-space: nowrap;
+
+  &:hover {
+    opacity: .88;
+  }
+}
+
+
+// ══════════════════════════════════════════════════════
+// MOBILE OVERLAY
+// ══════════════════════════════════════════════════════
+.mobile-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: $overlay-bg;
+  z-index: 998;
+  opacity: 0;
+  transition: opacity .25s;
+
+  &.visible {
+    opacity: 1;
+  }
+}
+
+
+// ══════════════════════════════════════════════════════
+// RESPONSIVE — MOBILE ≤ 768px
+// ══════════════════════════════════════════════════════
+@media (max-width: $bp-mobile) {
+
+  // .hamburger-wrap shown via JS (syncHamburger())
+  // No CSS show/hide here to avoid race with JS init
+
+  .nav-right {
+    display: none;
+  }
+
+  // Slide-in drawer
+  .nav-list {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    position: fixed;
+    top: 0;
+    right: -300px;
+    width: 280px;
+    height: 100dvh;
+    background: $drop-bg;
+    border-left: 1px solid $drop-border;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 68px 0 24px;
+    transition: right .32s $transition-spring;
+    z-index: 999;
+    list-style: none;
+
+    &.open {
+      right: 0;
+    }
+  }
+
+  // L1 items stack vertically
+  .nav-item {
+    flex-direction: column;
+    align-items: stretch;
+
+
+    // Disable hover underline (touch only on mobile)
+    &:hover > .nav-trigger {
+      border-bottom-color: transparent;
+    }
+
+    &.open {
+      > .nav-trigger {
+        color: $text;
+        background: $hover-bg;
+
+        .caret {
+          transform: rotate(-180deg);
+          opacity: 1;
+        }
+      }
+
+      > .dropdown {
+        max-height: 600px;
+      }
+    }
+
+    // L2 dropdown → accordion
+    > .dropdown {
+      @include accordion-reset;
+      background: $accordion-l2-bg;
+      transition: max-height .32s $transition-spring;
+    }
+  }
+
+  // L1 trigger — full-width row
+  .nav-trigger {
+    padding: 14px 20px;
+    height: auto;
+    border-bottom: none;
+    border-radius: 0;
+    font-size: 14px;
+    width: 100%;
+    justify-content: space-between;
+  }
+ .nav-trigger{
+      color: $text;
+    }
+  // L1 plain link — same row height as trigger
+  .nav-link {
+    padding: 14px 20px;
+    height: auto;
+    border-bottom: none;
+    border-radius: 0;
+    font-size: 14px;
+    color: $white;
+
+    &:hover {
+      border-bottom-color: transparent;
+    }
+   
+  }
+
+  // L2 rows
+  .sub-item {
+    border-bottom: none;
+
+    &.open {
+      > .sub-link .arrow-r {
+        transform: rotate(-180deg);
+        opacity: .9;
+      }
+
+      > .dropdown {
+        max-height: 400px;
+      }
+    }
+
+    // L3 → nested accordion
+    > .dropdown {
+      @include accordion-reset;
+      background: $accordion-l3-bg;
+      transition: max-height .28s $transition-spring;
+
+      .sub-link {
+        padding-left: 48px;
+        font-size: 12.5px;
+      }
+
+      .sub-icon {
+        width: 22px;
+        height: 22px;
+        font-size: 10px;
+      }
+    }
+  }
+
+  .sub-link {
+    padding: 11px 20px 11px 32px;
+    border-radius: 0;
+  }
+
+  // arrow-r → flips to down chevron on mobile
+  .arrow-r {
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+    border-top: 5px solid currentColor;
+    border-bottom: none;
+    width: 0;
+    height: 0;
+    transition: transform .22s, opacity .15s;
+  }
+
+  .sep {
+    margin: 2px 0;
+  }
+
+  // CTA row at the bottom of the mobile drawer
+  .nav-actions-mobile {
+    display: flex;
+    gap: 10px;
+    padding: 20px;
+    border-top: 1px solid $drop-border;
+    margin-top: 8px;
+    list-style: none;
+
+    .btn-ghost,
+    .btn-fill {
+      flex: 1;
+      text-align: center;
+    }
+  }
+}
+
+.mobile-btn{
+    list-style:none;margin-left:auto;display:none;
+}
+
+// ══════════════════════════════════════════════════════
+// DESKTOP ONLY ≥ 769px
+// ══════════════════════════════════════════════════════
+@media (min-width: $bp-mobile + 1) {
+  .nav-actions-mobile {
+    display: none;
+  }
+
+  .mobile-overlay {
+    display: none !important;
+  }
+}
+
+
+// ══════════════════════════════════════════════════════
+// SMALL MOBILE ≤ 480px
+// ══════════════════════════════════════════════════════
+@media (max-width: $bp-small) {
+  .nav-inner {
+    padding: 0 16px;
+  }
+  .mobile-btn {
+    display: block;
+  }
+
+  .logo {
+    margin-right: 0;
+  }
+}

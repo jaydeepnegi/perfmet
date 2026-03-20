@@ -1,0 +1,47 @@
+@use "variable" as *;
+
+
+.products-slider{
+    position: relative;
+    padding: 5rem 4.5rem
+}
+.products-slider .button_primary{
+    background: $accent;
+    color: $text;
+    padding: 10px 20px;
+    transform: translate(0, 0);
+    opacity: 1;
+    svg{
+        width: 16px;
+        height: 16px;
+    }
+}
+.products-slider .swiper-button-prev,
+.products-slider .swiper-button-next {
+    width: 60px;
+    height: 60px;
+    color: $text-black;
+    opacity: 1;
+    position: absolute;
+}
+.products-slider .swiper-button-prev::after,
+.products-slider .swiper-button-next::after {
+    font-size: 16px;
+}
+.products-slider .swiper-button-prev {
+    left: 40px;
+}
+.products-slider .swiper-button-next {
+    right: 40px;
+    left: auto;
+}   
+.product-img {
+    border-radius: 10px 10px 0 0;
+}
+.product-ttl{
+    font-size: 18px;
+    margin: 10px 0;
+}
+.product_wrap p{
+    margin-bottom: 10px;
+}

@@ -1,0 +1,193 @@
+    @use "variable" as *;
+    .mv {
+
+      padding: 5rem 4.5rem;
+
+      width: 100%;
+      position: relative;
+      overflow: hidden;
+    }
+ 
+    /* subtle corner glow */
+    .mv::before {
+      content: '';
+      position: absolute;
+      top: -120px;
+      right: -120px;
+      width: 380px;
+      height: 380px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(94,207,176,0.07) 0%, transparent 70%);
+      pointer-events: none;
+    }
+ 
+    /* top section */
+    .mv-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 4.5rem;
+      gap: 2rem;
+    }
+ 
+    .mv-tag {
+      font-family: -apple-system, 'Helvetica Neue', sans-serif;
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #5ecfb0;
+      margin-bottom: 1.25rem;
+    }
+ 
+    .mv-h1 {
+      font-size: clamp(24px, 5vw, 46px);
+      font-weight: 700;
+      color: #000;
+      line-height: 1.1;
+      font-style: italic;
+      letter-spacing: -0.015em;
+    }
+ 
+    .mv-h1 span {
+      color: $accent;
+      font-style: normal;
+    }
+ 
+    .mv-desc {
+      max-width: 260px;
+      font-family: -apple-system, 'Helvetica Neue', sans-serif;
+      font-size: 13px;
+      color: $text-black;
+      line-height: 1.8;
+      text-align: right;
+      flex-shrink: 0;
+      padding-bottom: 4px;
+    }
+ 
+    /* divider */
+    .mv-divider {
+      width: 100%;
+      height: 0.5px;
+      background: rgba(255,255,255,1);
+      margin-bottom: 4rem;
+    }
+ 
+    /* steps grid */
+    .mv-steps {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 0;
+    }
+ 
+    .mv-step {
+      padding-right: 2.5rem;
+      border-right: 0.5px solid rgb(31, 31, 31);
+      display: flex;
+      flex-direction: column;
+      gap: 1.1rem;
+    }
+ 
+    .mv-step:last-child {
+      border-right: none;
+      padding-right: 0;
+    }
+ 
+    .mv-step:not(:first-child) {
+      padding-left: 2rem;
+    }
+ 
+    .mv-num {
+      font-family: -apple-system, 'Helvetica Neue', sans-serif;
+      font-size: 11px;
+      letter-spacing: 0.16em;
+      color: rgba(0, 0, 0,);
+    }
+ 
+    .mv-accent {
+      width: 28px;
+      height: 1.5px;
+      background: #171717;
+      border-radius: 2px;
+    }
+ 
+    .mv-step-title {
+      font-size: 22px;
+      font-weight: 600;
+      color: #000;
+      line-height: 1.35;
+
+    }
+ 
+    .mv-step-body {
+
+      font-size: 15px;
+      color: #000;
+      line-height: 1.78;
+      flex: 1;
+    }
+ 
+    .mv-ghost-num {
+      font-size: 60px;
+      font-weight: 400;
+      color: rgba(4, 4, 4, 0.035);
+      font-style: italic;
+      line-height: 1;
+      margin-top: auto;
+      padding-top: 2rem;
+      text-align: right;
+      user-select: none;
+    }
+ 
+    /* footer */
+    .mv-footer {
+      margin-top: 4rem;
+      padding-top: 2rem;
+      border-top: 0.5px solid rgba(255,255,255,0.07);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+ 
+    .mv-footer-txt {
+      font-family: -apple-system, 'Helvetica Neue', sans-serif;
+      font-size: 12px;
+      color: rgba(255,255,255,0.25);
+      letter-spacing: 0.06em;
+    }
+ 
+    .mv-dots {
+      display: flex;
+      gap: 7px;
+      align-items: center;
+    }
+ 
+    .mv-dot {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: #5ecfb0;
+      opacity: 0.3;
+    }
+ 
+    .mv-dot.active { opacity: 1; }
+ 
+    /* responsive */
+    @media (max-width: 768px) {
+      .mv { padding: 3rem 2rem; }
+      .mv-top { flex-direction: column; align-items: flex-start; }
+      .mv-desc { text-align: left; max-width: 100%; }
+      .mv-steps { grid-template-columns: 1fr 1fr; gap: 2.5rem 0; }
+      .mv-step { padding-right: 1.5rem; }
+      .mv-step:nth-child(2n) { border-right: none; }
+      .mv-step:nth-child(3), .mv-step:nth-child(4) {
+        border-top: 0.5px solid rgba(255,255,255,0.07);
+        padding-top: 2rem;
+      }
+    }
+ 
+    @media (max-width: 480px) {
+      .mv { padding: 2.5rem 1.5rem; border-radius: 16px; }
+      .mv-steps { grid-template-columns: 1fr; gap: 2.5rem; }
+      .mv-step { border-right: none; border-top: 0.5px solid rgba(255,255,255,0.07); padding: 2rem 0 0; }
+      .mv-step:first-child { border-top: none; padding-top: 0; }
+    }

@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/main.css">
+</head>
+
+<body>
+  <header class="site-header">
+    <div class="mobile-overlay" id="overlay"></div>
+
+    <nav>
+      <div class="nav-inner">
+        <div class="logo"><img src="assets/images/logo.webp" width="150" alt=""></div>
+
+
+
+        <ul class="nav-list" id="nav-list">
+          <li class="nav-item">
+            <a class="nav-link" href="#home">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#home">About</a>
+          </li>
+          <!-- ── Products ── -->
+
+          <li class="nav-item">
+            <span class="nav-trigger" data-toggle="l1">Architects <span class="caret"></span></span>
+            <ul class="dropdown">
+
+              <li class="sub-item">
+                <a class="sub-link" href="#platform" data-toggle="l2">
+                  <span class="sub-icon">◈</span>
+                  <span class="sub-info">
+                    <div class="sub-title">Platform</div>
+                    <div class="sub-desc">Core infrastructure</div>
+                  </span>
+                  <span class="arrow-r"></span>
+                </a>
+                <ul class="dropdown">
+                  <li class="sub-item"><a class="sub-link" href="#api-gateway"><span class="sub-icon">⚙</span><span
+                        class="sub-info">
+                        <div class="sub-title">API Gateway</div>
+                        <div class="sub-desc">Route &amp; throttle</div>
+                      </span></a></li>
+                  <li class="sub-item"><a class="sub-link" href="#cloud-sync"><span class="sub-icon">☁</span><span
+                        class="sub-info">
+                        <div class="sub-title">Cloud Sync</div>
+                        <div class="sub-desc">Real-time replication</div>
+                      </span></a></li>
+                  <li class="sep"></li>
+                  <li class="sub-item"><a class="sub-link" href="#vault"><span class="sub-icon">🔐</span><span
+                        class="sub-info">
+                        <div class="sub-title">Vault</div>
+                        <div class="sub-desc">Secrets management</div>
+                      </span></a></li>
+                </ul>
+              </li>
+
+              <li class="sub-item">
+                <a class="sub-link" href="#analytics" data-toggle="l2">
+                  <span class="sub-icon">◎</span>
+                  <span class="sub-info">
+                    <div class="sub-title">Analytics</div>
+                    <div class="sub-desc">Data &amp; insights</div>
+                  </span>
+                  <span class="arrow-r"></span>
+                </a>
+                <ul class="dropdown">
+                  <li class="sub-item"><a class="sub-link" href="#dashboards"><span class="sub-icon">📊</span><span
+                        class="sub-info">
+                        <div class="sub-title">Dashboards</div>
+                        <div class="sub-desc">Live metrics</div>
+                      </span></a></li>
+                  <li class="sub-item"><a class="sub-link" href="#query"><span class="sub-icon">🔍</span><span
+                        class="sub-info">
+                        <div class="sub-title">Query Builder</div>
+                        <div class="sub-desc">Custom reports</div>
+                      </span></a></li>
+                  <li class="sub-item"><a class="sub-link" href="#ai-insights"><span class="sub-icon">🤖</span><span
+                        class="sub-info">
+                        <div class="sub-title">AI Insights</div>
+                      </span><span class="badge">Beta</span></a></li>
+                </ul>
+              </li>
+
+              <li class="sep"></li>
+              <li class="sub-item"><a class="sub-link" href="#integrations"><span class="sub-icon">◻</span><span
+                    class="sub-info">
+                    <div class="sub-title">Integrations</div>
+                  </span></a></li>
+            </ul>
+          </li>
+
+          <!-- ── Solutions ── -->
+          <li class="nav-item">
+            <span class="nav-trigger" data-toggle="l1">Builders <span class="caret"></span></span>
+            <ul class="dropdown">
+
+              <li class="sub-item">
+                <a class="sub-link" href="#enterprise" data-toggle="l2">
+                  <span class="sub-icon">🏢</span>
+                  <span class="sub-info">
+                    <div class="sub-title">Enterprise</div>
+                    <div class="sub-desc">Large organisations</div>
+                  </span>
+                  <span class="arrow-r"></span>
+                </a>
+                <ul class="dropdown">
+                  <li class="sub-item"><a class="sub-link" href="#sso"><span class="sub-icon">🛡</span><span
+                        class="sub-info">
+                        <div class="sub-title">SSO &amp; SCIM</div>
+                        <div class="sub-desc">Identity management</div>
+                      </span></a></li>
+                  <li class="sub-item"><a class="sub-link" href="#audit"><span class="sub-icon">📋</span><span
+                        class="sub-info">
+                        <div class="sub-title">Audit Logs</div>
+                        <div class="sub-desc">Compliance ready</div>
+                      </span></a></li>
+                  <li class="sub-item"><a class="sub-link" href="#sla"><span class="sub-icon">💼</span><span
+                        class="sub-info">
+                        <div class="sub-title">SLA Support</div>
+                      </span><span class="badge">Pro</span></a></li>
+                </ul>
+              </li>
+
+              <li class="sub-item">
+                <a class="sub-link" href="#startups" data-toggle="l2">
+                  <span class="sub-icon">🚀</span>
+                  <span class="sub-info">
+                    <div class="sub-title">Startups</div>
+                    <div class="sub-desc">Scale quickly</div>
+                  </span>
+                  <span class="arrow-r"></span>
+                </a>
+                <ul class="dropdown">
+                  <li class="sub-item"><a class="sub-link" href="#free"><span class="sub-icon">🎁</span><span
+                        class="sub-info">
+                        <div class="sub-title">Free Tier</div>
+                        <div class="sub-desc">Get started fast</div>
+                      </span></a></li>
+                  <li class="sub-item"><a class="sub-link" href="#growth"><span class="sub-icon">📈</span><span
+                        class="sub-info">
+                        <div class="sub-title">Growth Plan</div>
+                        <div class="sub-desc">Usage-based billing</div>
+                      </span></a></li>
+                </ul>
+              </li>
+
+            </ul>
+          </li>
+
+          <!-- ── Resources ── -->
+          <li class="nav-item">
+            <span class="nav-trigger" data-toggle="l1">Products <span class="caret"></span></span>
+            <ul class="dropdown">
+             <li class="sub-item">
+                <a class="sub-link" href="#platform" data-toggle="l2">
+                 
+                  <span class="sub-info">
+                    <div class="sub-title">Solshade</div>
+                 
+                  </span>
+                  <span class="arrow-r"></span>
+                </a>
+                <ul class="dropdown">
+                  <li class="sub-item"><a class="sub-link" href="#api-gateway">
+                    <span
+                        class="sub-info">
+                        <div class="sub-title">Window Hoods</div></span></a></li>
+                  <li class="sub-item"><a class="sub-link" href="#cloud-sync">
+                        <div class="sub-title"> Facade Battens</div></a></li>
+                  <li class="sep"></li>
+                  <li class="sub-item"><a class="sub-link" href="#vault"><span
+                        class="sub-info">
+                        <div class="sub-title"> Balcony Screens</div>
+
+                      </span></a></li>
+                </ul>
+              </li>
+
+
+              <li class="sub-item"><a class="sub-link" href="#blog"><span class="sub-info">
+                    <div class="sub-title">Blog</div>
+                  </span></a></li>
+              <li class="sub-item"><a class="sub-link" href="#changelog"><span class="sub-info">
+                    <div class="sub-title">Changelog</div>
+                  </span><span class="badge">New</span></a></li>
+            </ul>
+          </li>
+
+          <!-- ── Pricing (leaf — real link) ── -->
+          <li class="nav-item"><a class="nav-link" href="#pricing">Services</a></li>
+          <li class="nav-item"><a class="nav-link" href="#pricing">Projects</a></li>
+          <li class="nav-item"><a class="nav-link" href="#pricing">Resources</a></li>
+          <li class="nav-item"><a class="nav-link" href="#pricing">Contact</a></li>
+
+          <!-- CTA buttons — visible in mobile drawer only -->
+          <li class="nav-actions-mobile">
+            <button class="btn-ghost">Log in</button>
+            <button class="btn-fill">Get started →</button>
+          </li>
+
+        </ul>
+        <!-- end nav-list -->
+
+        <div class="nav-right">
+          <button class="btn-ghost"><span class="material-symbols-outlined">
+              wifi_calling_bar_1
+            </span> 08 9209 1011</button>
+          <button class="btn-fill">Get started →</button>
+        </div>
+
+        <!-- Hamburger — a plain <li> styled as icon -->
+        <ul class="mobile-btn" id="hamburger-wrap">
+          <li class="hamburger" id="hamburger" role="button" aria-label="Toggle menu" tabindex="0">
+            <span></span><span></span><span></span>
+          </li>
+        </ul>
+
+      </div>
+    </nav>
+  </header>
+  <section class="hero-slider">
+    <div class="swiper heroSwiper">
+      <div class="swiper-wrapper">
+
+        <!-- Slide 1 -->
+        <div class="swiper-slide active"
+          style="background-image:url('https://perfmet.com.au/wp-content/uploads/2024/11/Station-St.jpg');">
+
+          <div class="overlay"></div>
+          <div class="content">
+            <h1>Engineered Architectural Metal Systems — Designed for WA Conditions.</h1>
+            <p>Designing spaces that inspire</p>
+            <button type="button" class="button_primary" aria-haspopup="dialog" aria-expanded="false" aria-controls=""
+              data-state="closed">
+              <div class="button_content">
+                <div class="button_button-round-text"><span data-text="Let’s Get Started">Let’s Get Started</span></div>
+                <span class="button_icon-after__vljdM"><svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                    viewBox="0 0 24 24">
+                    <path fill="currentColor"
+                      d="m20.78 12.531-6.75 6.75a.75.75 0 1 1-1.06-1.061l5.47-5.47H3.75a.75.75 0 1 1 0-1.5h14.69l-5.47-5.469a.75.75 0 1 1 1.06-1.061l6.75 6.75a.75.75 0 0 1 0 1.061">
+                    </path>
+                  </svg></span>
+              </div>
+            </button>
+          </div>
+        </div>
+
+        <!-- Slide 2 -->
+        <div class="swiper-slide" style="background-image:url('assets/images/banner-1-2.jpg');">
+          <div class="overlay"></div>
+          <div class="content">
+            <h1>Modern Facade Systems</h1>
+            <p>Built for performance & beauty</p>
+          </div>
+        </div>
+
+        <!-- Slide 3 -->
+        <div class="swiper-slide"
+          style="background-image:url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab');">
+          <div class="overlay"></div>
+          <div class="content">
+            <h1>Engineering Innovation</h1>
+            <p>Partnering with architects</p>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Bottom Center Navigation -->
+      <div class="nav-wrapper">
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
+      </div>
+
+    </div>
+
+    <div class="categories-bar">
+      <a href="#" class="category">Aerofin
+        <span class="material-symbols-outlined">
+          arrow_outward
+        </span>
+      </a>
+
+
+      <a href="#" class="category">Solshade
+        <span class="material-symbols-outlined">
+          arrow_outward
+        </span>
+      </a>
+
+
+      <a href="#" class="category">Urbangreen
+        <span class="material-symbols-outlined">
+          arrow_outward
+        </span>
+      </a>
+
+
+      <a href="#" class="category">Perfscreen <span class="material-symbols-outlined">
+          arrow_outward
+        </span>
+      </a>
+
+    </div>
+  </section>
+  <section class="mv">
+    <div class="mv-top">
+      <div>
+        <h1 class="mv-h1">Your Vision<br><span>Our</span> Mission</h1>
+      </div>
+      <p class="mv-desc">Every great outcome begins with a clear direction. Here's how we bring your ideas to life, step
+        by step.</p>
+    </div>
+
+    <div class="mv-divider"></div>
+
+    <div class="mv-steps">
+      <div class="mv-step">
+
+
+        <h3 class="mv-step-title">Concept Development</h3>
+        <p class="mv-step-body">We collaborate closely with you to shape raw ideas into clear, actionable project
+          requirements.</p>
+        <div class="mv-ghost-num">01</div>
+      </div>
+      <div class="mv-step">
+
+        <h3 class="mv-step-title">Cost Estimation</h3>
+        <p class="mv-step-body">We produce early preliminary costings with a sharp focus on best value without
+          compromising quality.</p>
+        <div class="mv-ghost-num">02</div>
+      </div>
+      <div class="mv-step">
+
+        <h3 class="mv-step-title">Engineering</h3>
+        <p class="mv-step-body">Our engineers provide expert structural guidance tailored precisely to the demands of
+          your project.</p>
+        <div class="mv-ghost-num">03</div>
+      </div>
+      <div class="mv-step">
+
+        <h3 class="mv-step-title">Manufacturing & Installation</h3>
+        <p class="mv-step-body">In-house production and installation ensures unmatched control over quality at every
+          stage.</p>
+        <div class="mv-ghost-num">04</div>
+      </div>
+    </div>
+
+
+  </section>
+
+  <section class="products-slider" aria-labelledby="products-slider-title">
+
+    <div class="">
+      <div class="head-wrap">
+        <h2 class="section-title" id="products-slider-title">Our Products</h2>
+        <div class="logo-container" data-logo-size="60"></div>
+      </div>
+      <div class="swiper mySwiper">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide">
+            <div class="product_wrap">
+              <div class="product-img ration-16x9 img-thumb">
+                <img src="assets/images/architectural-metal-works.jpg" alt="">
+              </div>
+              <h2 class="product-ttl">Solshade</h2>
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsum ipsa ut eius. Sint ullam necessitatibus
+                optio exercitationem tenetur debitis recusandae!</p>
+            </div>
+            <button type="button" class="button_primary" aria-haspopup="dialog" aria-expanded="false" aria-controls=""
+              data-state="closed">
+              <div class="button_content">
+                <div class="button_button-round-text"><span data-text="Let’s Get Started">Learn more</span></div><span
+                  class="button_icon-after__vljdM"><svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                    viewBox="0 0 24 24">
+                    <path fill="currentColor"
+                      d="m20.78 12.531-6.75 6.75a.75.75 0 1 1-1.06-1.061l5.47-5.47H3.75a.75.75 0 1 1 0-1.5h14.69l-5.47-5.469a.75.75 0 1 1 1.06-1.061l6.75 6.75a.75.75 0 0 1 0 1.061">
+                    </path>
+                  </svg></span>
+              </div>
+            </button>
+          </div>
+          <div class="swiper-slide">
+            <div class="product_wrap">
+              <div class="product-img ration-16x9 img-thumb">
+                <img src="assets/images/architectural-metal-works.jpg" alt="">
+              </div>
+              <h2 class="product-ttl">Louvres Systems</h2>
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsum ipsa ut eius. Sint ullam necessitatibus
+                optio exercitationem tenetur debitis recusandae!</p>
+            </div>
+            <button type="button" class="button_primary" aria-haspopup="dialog" aria-expanded="false" aria-controls=""
+              data-state="closed">
+              <div class="button_content">
+                <div class="button_button-round-text"><span data-text="Let’s Get Started">Learn more</span></div><span
+                  class="button_icon-after__vljdM"><svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                    viewBox="0 0 24 24">
+                    <path fill="currentColor"
+                      d="m20.78 12.531-6.75 6.75a.75.75 0 1 1-1.06-1.061l5.47-5.47H3.75a.75.75 0 1 1 0-1.5h14.69l-5.47-5.469a.75.75 0 1 1 1.06-1.061l6.75 6.75a.75.75 0 0 1 0 1.061">
+                    </path>
+                  </svg></span>
+              </div>
+            </button>
+          </div>
+          <div class="swiper-slide">
+            <div class="product_wrap">
+              <div class="product-img ration-16x9 img-thumb">
+                <img src="assets/images/architectural-metal-works.jpg" alt="">
+              </div>
+              <h2 class="product-ttl">Perfscreen</h2>
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsum ipsa ut eius. Sint ullam necessitatibus
+                optio exercitationem tenetur debitis recusandae!</p>
+            </div>
+            <button type="button" class="button_primary" aria-haspopup="dialog" aria-expanded="false" aria-controls=""
+              data-state="closed">
+              <div class="button_content">
+                <div class="button_button-round-text"><span data-text="Let’s Get Started">Learn more</span></div><span
+                  class="button_icon-after__vljdM"><svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                    viewBox="0 0 24 24">
+                    <path fill="currentColor"
+                      d="m20.78 12.531-6.75 6.75a.75.75 0 1 1-1.06-1.061l5.47-5.47H3.75a.75.75 0 1 1 0-1.5h14.69l-5.47-5.469a.75.75 0 1 1 1.06-1.061l6.75 6.75a.75.75 0 0 1 0 1.061">
+                    </path>
+                  </svg></span>
+              </div>
+            </button>
+          </div>
+          <div class="swiper-slide">
+            <div class="product_wrap">
+              <div class="product-img ration-16x9 img-thumb">
+                <img src="assets/images/architectural-metal-works.jpg" alt="">
+              </div>
+              <h2 class="product-ttl">Safety & Access</h2>
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsum ipsa ut eius. Sint ullam necessitatibus
+                optio exercitationem tenetur debitis recusandae!</p>
+            </div>
+            <button type="button" class="button_primary" aria-haspopup="dialog" aria-expanded="false" aria-controls=""
+              data-state="closed">
+              <div class="button_content">
+                <div class="button_button-round-text"><span data-text="Let’s Get Started">Learn more</span></div><span
+                  class="button_icon-after__vljdM"><svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                    viewBox="0 0 24 24">
+                    <path fill="currentColor"
+                      d="m20.78 12.531-6.75 6.75a.75.75 0 1 1-1.06-1.061l5.47-5.47H3.75a.75.75 0 1 1 0-1.5h14.69l-5.47-5.469a.75.75 0 1 1 1.06-1.061l6.75 6.75a.75.75 0 0 1 0 1.061">
+                    </path>
+                  </svg></span>
+              </div>
+            </button>
+          </div>
+          <div class="swiper-slide">
+            <div class="product_wrap">
+              <div class="product-img ration-16x9 img-thumb">
+                <img src="assets/images/architectural-metal-works.jpg" alt="">
+              </div>
+              <h2 class="product-ttl">Urbangreen</h2>
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsum ipsa ut eius. Sint ullam necessitatibus
+                optio exercitationem tenetur debitis recusandae!</p>
+            </div>
+            <button type="button" class="button_primary" aria-haspopup="dialog" aria-expanded="false" aria-controls=""
+              data-state="closed">
+              <div class="button_content">
+                <div class="button_button-round-text"><span data-text="Let’s Get Started">Learn more</span></div><span
+                  class="button_icon-after__vljdM"><svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                    viewBox="0 0 24 24">
+                    <path fill="currentColor"
+                      d="m20.78 12.531-6.75 6.75a.75.75 0 1 1-1.06-1.061l5.47-5.47H3.75a.75.75 0 1 1 0-1.5h14.69l-5.47-5.469a.75.75 0 1 1 1.06-1.061l6.75 6.75a.75.75 0 0 1 0 1.061">
+                    </path>
+                  </svg></span>
+              </div>
+            </button>
+          </div>
+
+        </div>
+       
+
+      </div>
+       <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
+    </div>
+  </section>
+
+
+  <section class="cta-hero">
+    <div class="logo-container" data-logo-size="80"></div>
+    <div class="head-wrap center">
+      <h2 class="section-title" id="products-slider-title">Bold & Modern</h2>
+
+    </div>
+
+    <p class="subtitle">
+      Where Complex Challenges Meet Creative Minds — Backed by expertise, talent, and tools built to deliver results
+      that matter.
+    </p>
+
+    <a href="#" class="btn-primary">
+      Contact Us
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+        <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+          stroke-linejoin="round" />
+      </svg>
+    </a>
+  </section>
+
+  <section class="section">
+  
+<div class="container">
+ <div class="head-wrap">
+        <h2 class="section-title" id="products-slider-title">Projects</h2>
+
+      </div>
+  <div class="row">
+
+    <!-- Col 1 — 2 images -->
+    <div class="col col-lg-4">
+
+      <div class="card">
+        <a href="#" class="view-project">View Project</a>
+        <img src="https://perfmet.com.au/wp-content/uploads/2025/02/DSC_0300-scaled.jpg" alt="Brand identity" style="object-fit:cover">
+        <div class="card-overlay">
+         
+          <div class="overlay-title">Eglinton Primary School – EMCO Building</div>
+          <div class="overlay-desc">Full visual identity system covering logo, typography, colour palette, and brand guidelines for a wellness startup.</div>
+        </div>
+        <div class="card-title">Eglinton Primary School – EMCO Building</div>
+      </div>
+
+      <div class="card">
+        <a href="#" class="view-project">View Project</a>
+        <img src="https://perfmet.com.au/wp-content/uploads/2025/02/DSC_0324-scaled.jpg" alt="Dev tooling" style="object-fit:cover">
+        <div class="card-overlay">
+          
+          <div class="overlay-title">One Richardson – EMCO Building</div>
+          <div class="overlay-desc">Open-source command-line toolkit that scaffolds projects, runs linting, and automates deployment pipelines.</div>
+        </div>
+        <div class="card-title">One Richardson – EMCO Building</div>
+      </div>
+
+    </div>
+
+    <!-- Col 2 — 1 tall image -->
+    <div class="col col-lg-4">
+
+      <div class="card" style="flex:1">
+        <a href="#" class="view-project">View Project</a>
+        <img src="https://perfmet.com.au/wp-content/uploads/2022/08/11-3.png" alt="Campaign" style="height:480px;object-fit:cover">
+        <div class="card-overlay">
+          
+          <div class="overlay-title">Paradiso Apartments</div>
+          <div class="overlay-desc">Multi-channel advertising campaign combining photography direction, motion graphics, and social-first content for a global launch.</div>
+        </div>
+        <div class="card-title">Paradiso Apartments</div>
+      </div>
+
+    </div>
+
+    <!-- Col 3 — 2 images -->
+    <div class="col col-lg-4">
+
+      <div class="card">
+        <a href="#" class="view-project">View Project</a>
+        <img src="https://perfmet.com.au/wp-content/uploads/2022/08/11-6.png" alt="Dashboard UI" style="object-fit:cover">
+        <div class="card-overlay">
+        
+          <div class="overlay-title">304 Fitzgerald Street</div>
+          <div class="overlay-desc">Responsive SaaS dashboard featuring real-time charts, role-based access, and a dark/light theme system built in React.</div>
+        </div>
+        <div class="card-title">304 Fitzgerald Street</div>
+      </div>
+
+      <div class="card">
+        <a href="#" class="view-project">View Project</a>
+        <img src="https://perfmet.com.au/wp-content/uploads/2022/08/13.png" alt="Team workshop" style="object-fit:cover">
+        <div class="card-overlay">
+      
+          <div class="overlay-title">Eden East Apartments</div>
+          <div class="overlay-desc">Five-day design sprint for a fintech client — from user research and rapid prototyping to a tested, investor-ready concept.</div>
+        </div>
+        <div class="card-title">Eden East Apartments</div>
+      </div>
+
+    </div>
+</div>
+  </div>
+</section>
+
+<section class="lets-connect">
+  <div class="container">
+    <div class="row">
+      <div class="col-12 text-center">
+        <div class="logo-container" data-logo-size="80"></div>
+          <h2 class="section-title" id="products-slider-title">Stay Connected</h2>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <div class="form-wrap">
+  <div class="form-row">
+    <div class="form-group">
+      <label class="form-label">Name *</label>
+      <input type="text" class="form-input" placeholder="">
+    </div>
+    <div class="form-group">
+      <label class="form-label">Email *</label>
+      <input type="email" class="form-input" placeholder="">
+    </div>
+  </div>
+
+  <div class="form-group form-group-full">
+    <label class="form-label">Message</label>
+    <textarea class="form-input"></textarea>
+  </div>
+
+  <button class="btn-send">Send Message</button>
+</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer">
+  <div class="footer-grid">
+
+    <!-- Products -->
+    <div class="footer-col-wide">
+      <div class="col-heading">Products</div>
+      <div style="display:flex;gap:2.5rem">
+        <ul class="footer-links">
+          <li><a href="#">Solar Shading</a></li>
+          <li><a href="#">Perforated Facades</a></li>
+          <li><a href="#">Carpark Facades</a></li>
+          <li><a href="#">Natural Ventilation</a></li>
+          <li><a href="#">Bespoke Facades</a></li>
+        </ul>
+        <ul class="footer-links">
+          <li><a href="#">Louvres</a></li>
+          <li><a href="#">Facade Battens</a></li>
+          <li><a href="#">Fire &amp; Smoke</a></li>
+          <li><a href="#">Acoustic Louvres &amp; Ventilators</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Projects -->
+    <div class="footer-col-wide">
+      <div class="col-heading">Projects</div>
+      <div class="projects-inner">
+        <ul class="footer-links">
+          <li><a href="#">Aged Care</a></li>
+          <li><a href="#">Commercial Offices</a></li>
+          <li><a href="#">Health</a></li>
+          <li><a href="#">Recreation &amp; Sport</a></li>
+          <li><a href="#">Apartments</a></li>
+        </ul>
+        <ul class="footer-links">
+          <li><a href="#">Carparks</a></li>
+          <li><a href="#">Education</a></li>
+          <li><a href="#">Hotels</a></li>
+          <li><a href="#">Warehouses</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Contact -->
+    <div class="footer-col-contact">
+      <div class="col-heading">Contact</div>
+      <table class="contact-table">
+        <tr>
+          <td>Phone:</td>
+          <td><a href="tel:1300458458"> 08 9209 1011</a></td>
+        </tr>
+        <tr>
+          <td>Sales:</td>
+          <td><a href="mailto:sales@perfmet.com.au">sales@perfmet.com.au</a></td>
+        </tr>
+        <tr>
+          <td>Address:</td>
+          <td><a href="">22 Distinction Road
+Wangara WA 6065</a></td>
+        </tr>
+      </table>
+    </div>
+
+    <!-- Socials -->
+    <div class="footer-col-social">
+      <div class="col-heading">Socials</div>
+      <div class="socials">
+        <a href="#" class="social-btn" aria-label="facebook">
+          <span class="social-icon"><svg width="800" height="800" viewBox="0 0 24 24" data-name="Flat Color" xmlns="http://www.w3.org/2000/svg" class="icon flat-color"><path d="M14 6h3a1 1 0 0 0 1-1V3a1 1 0 0 0-1-1h-3a5 5 0 0 0-5 5v3H7a1 1 0 0 0-1 1v2a1 1 0 0 0 1 1h2v7a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1v-7h2.22a1 1 0 0 0 1-.76l.5-2a1 1 0 0 0-1-1.24H13V7a1 1 0 0 1 1-1" style="fill:#fff"/></svg></span>
+        </a>
+        <a href="#" class="social-btn" aria-label="Twitter">
+          <span class="social-icon"><svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 1226.37 1226.37" xml:space="preserve"><path d="M727.348 519.284 1174.075 0h-105.86L680.322 450.887 370.513 0H13.185l468.492 681.821L13.185 1226.37h105.866l409.625-476.152 327.181 476.152h357.328L727.322 519.284zM582.35 687.828l-47.468-67.894-377.686-540.24H319.8l304.797 435.991 47.468 67.894 396.2 566.721H905.661L582.35 687.854z" data-original="#000000"/></svg></span>
+        </a>
+        <a href="#" class="social-btn" aria-label="instagram">
+          <span class="social-icon"><svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 1226.37 1226.37" xml:space="preserve"><path d="M727.348 519.284 1174.075 0h-105.86L680.322 450.887 370.513 0H13.185l468.492 681.821L13.185 1226.37h105.866l409.625-476.152 327.181 476.152h357.328L727.322 519.284zM582.35 687.828l-47.468-67.894-377.686-540.24H319.8l304.797 435.991 47.468 67.894 396.2 566.721H905.661L582.35 687.854z" data-original="#000000"/></svg></span>
+        </a>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- Bottom bar -->
+<div class="bottom-bar">
+  <span class="bottom-copy">© Perfmet  2025. All Rights Reserved.</span>
+  <div class="bottom-links">
+    <a href="#">Privacy Policy</a>
+    <a href="#">Careers</a>
+  </div>
+  <span class="bottom-credit">Vgrow Digital</span>
+</div>
+
+</footer>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <script src="assets/js/main.js"></script>
+</body>
+
+</html>

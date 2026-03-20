@@ -1,0 +1,78 @@
+@use "variable" as *;
+    .cta-hero {
+      text-align: center;
+      padding: 80px 40px;
+      max-width: 860px;
+      width: 100%;
+      margin: 0 auto;
+      position: relative;
+      border-top: 1px solid #000;
+      margin-top: 90px;
+    }
+ 
+    .title-wrap {
+      position: relative;
+      display: inline-block;
+      margin-bottom: 32px;
+    }
+ 
+
+ 
+    .logo-icon {
+      position: absolute;
+      top: -10px;
+      right: -64px;
+      width: 54px;
+      height: 54px;
+    }
+ 
+    .subtitle {
+      font-size: clamp(1rem, 2vw, 1.2rem);
+      color: var(--text-body);
+      line-height: 1.7;
+      max-width: 580px;
+      margin: 0 auto 48px;
+      font-weight: 400;
+    }
+ 
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 16px 38px;
+      border: 2px solid $accent;
+      border-radius: 50px;
+      color: $accent;
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      text-decoration: none;
+      background: transparent;
+      cursor: pointer;
+      transition: background 0.25s, color 0.25s, transform 0.2s;
+    }
+ 
+    .btn-primary:hover {
+      background: $accent;
+      color: #fff;
+      transform: translateY(-2px);
+    }
+ 
+    .btn-primary svg {
+      transition: transform 0.2s;
+    }
+ 
+    .btn-primary:hover svg {
+      transform: translateX(4px);
+    }
+ 
+    /* Animated entrance */
+    .title-wrap { animation: fadeUp 0.7s ease both; }
+    .subtitle    { animation: fadeUp 0.7s 0.15s ease both; }
+    .btn         { animation: fadeUp 0.7s 0.28s ease both; }
+ 
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }

@@ -1,0 +1,341 @@
+// ============================================================
+//  GRID SYSTEM — Flexible Column Layout
+//  A 12-column fluid grid with responsive breakpoints,
+//  gutters, offset support, and alignment utilities.
+// ============================================================
+
+@use "sass:math";
+
+// ------------------------------------------------------------
+//  CONFIGURATION
+// ------------------------------------------------------------
+
+$grid-columns:        12       !default;
+$grid-gutter:         1.5rem   !default;    // gap between columns
+$grid-outer-gutter:   1.5rem   !default;    // container side padding
+
+// Breakpoints
+$breakpoints: (
+  "xs":  0px,
+  "sm":  576px,
+  "md":  768px,
+  "lg":  992px,
+  "xl":  1200px,
+  "xxl": 1400px,
+) !default;
+
+// Max-width per breakpoint (null = fluid)
+$container-max-widths: (
+  "sm":  540px,
+  "md":  720px,
+  "lg":  960px,
+  "xl":  1140px,
+  "xxl": 1320px,
+) !default;
+
+
+// ------------------------------------------------------------
+//  MIXINS
+// ------------------------------------------------------------
+
+/// Respond above a named breakpoint
+@mixin respond-above($bp) {
+  $min: map-get($breakpoints, $bp);
+  @if $min == 0px {
+    @content;
+  } @else {
+    @media (min-width: $min) {
+      @content;
+    }
+  }
+}
+
+/// Respond between two breakpoints
+@mixin respond-between($lower, $upper) {
+  $min: map-get($breakpoints, $lower);
+  $max: map-get($breakpoints, $upper) - 1px;
+  @media (min-width: $min) and (max-width: $max) {
+    @content;
+  }
+}
+
+/// Respond below a named breakpoint
+@mixin respond-below($bp) {
+  $max: map-get($breakpoints, $bp) - 1px;
+  @media (max-width: $max) {
+    @content;
+  }
+}
+
+/// Make a column of a given span (out of $grid-columns)
+@mixin make-col($span, $columns: $grid-columns) {
+  flex: 0 0 auto;
+  width: percentage(math.div($span, $columns));
+}
+
+/// Offset a column from the left
+@mixin make-col-offset($span, $columns: $grid-columns) {
+  margin-left: percentage(math.div($span, $columns));
+}
+
+
+// ------------------------------------------------------------
+//  BASE — CONTAINER
+// ------------------------------------------------------------
+
+.container,
+.container-fluid {
+  width: 100%;
+  padding-right: $grid-outer-gutter;
+  padding-left:  $grid-outer-gutter;
+  margin-right: auto;
+  margin-left:  auto;
+}
+
+// Fixed-width containers per breakpoint
+@each $bp, $max-width in $container-max-widths {
+  .container {
+    @include respond-above($bp) {
+      max-width: $max-width;
+    }
+  }
+}
+
+// Named containers (.container-sm, .container-md …)
+@each $bp, $max-width in $container-max-widths {
+  .container-#{$bp} {
+    width: 100%;
+    padding-right: $grid-outer-gutter;
+    padding-left:  $grid-outer-gutter;
+    margin-right: auto;
+    margin-left:  auto;
+
+    @include respond-above($bp) {
+      max-width: $max-width;
+    }
+  }
+}
+
+
+// ------------------------------------------------------------
+//  BASE — ROW
+// ------------------------------------------------------------
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: math.div($grid-gutter, -2);
+  margin-left:  math.div($grid-gutter, -2);
+
+  // Remove gutters
+  &.g-0 {
+    margin-right: 0;
+    margin-left:  0;
+
+    > [class*="col"] {
+      padding-right: 0;
+      padding-left:  0;
+    }
+  }
+}
+
+
+// ------------------------------------------------------------
+//  BASE — COLUMNS
+// ------------------------------------------------------------
+
+// All [class*="col"] children of a .row share base padding
+.row > [class*="col"] {
+  padding-right: math.div($grid-gutter, 2);
+  padding-left:  math.div($grid-gutter, 2);
+  box-sizing: border-box;
+}
+
+// col — auto-fill, equal-width columns
+.col {
+  flex: 1 0 0%;
+  min-width: 0;
+}
+
+// col-auto — shrink to content width
+.col-auto {
+  flex: 0 0 auto;
+  width: auto;
+}
+
+
+// ------------------------------------------------------------
+//  COLUMN SPANS  — col-{n}, col-{bp}-{n}
+// ------------------------------------------------------------
+
+// Base (xs / no breakpoint prefix)
+@for $i from 1 through $grid-columns {
+  .col-#{$i} {
+    @include make-col($i);
+  }
+}
+
+// Responsive column spans
+@each $bp, $value in $breakpoints {
+  @if $bp != "xs" {
+    @include respond-above($bp) {
+      // auto & fill variants
+      .col-#{$bp} {
+        flex: 1 0 0%;
+        min-width: 0;
+      }
+      .col-#{$bp}-auto {
+        flex: 0 0 auto;
+        width: auto;
+      }
+
+      @for $i from 1 through $grid-columns {
+        .col-#{$bp}-#{$i} {
+          @include make-col($i);
+        }
+      }
+    }
+  }
+}
+
+
+// ------------------------------------------------------------
+//  OFFSETS  — offset-{n}, offset-{bp}-{n}
+// ------------------------------------------------------------
+
+@for $i from 0 through ($grid-columns - 1) {
+  .offset-#{$i} {
+    @include make-col-offset($i);
+  }
+}
+
+@each $bp, $value in $breakpoints {
+  @if $bp != "xs" {
+    @include respond-above($bp) {
+      @for $i from 0 through ($grid-columns - 1) {
+        .offset-#{$bp}-#{$i} {
+          @include make-col-offset($i);
+        }
+      }
+    }
+  }
+}
+
+
+// ------------------------------------------------------------
+//  GUTTER UTILITIES  — g-{0..5}, gx-*, gy-*
+// ------------------------------------------------------------
+
+$gutters: (
+  0: 0,
+  1: 0.25rem,
+  2: 0.5rem,
+  3: 1rem,
+  4: 1.5rem,
+  5: 3rem,
+) !default;
+
+@each $key, $size in $gutters {
+  // Both axes
+  .g-#{$key} {
+    margin-right: math.div($size, -2);
+    margin-left:  math.div($size, -2);
+
+    > [class*="col"] {
+      padding-right: math.div($size, 2);
+      padding-left:  math.div($size, 2);
+    }
+  }
+
+  // Horizontal
+  .gx-#{$key} {
+    margin-right: math.div($size, -2);
+    margin-left:  math.div($size, -2);
+
+    > [class*="col"] {
+      padding-right: math.div($size, 2);
+      padding-left:  math.div($size, 2);
+    }
+  }
+
+  // Vertical
+  .gy-#{$key} {
+    > [class*="col"] {
+      padding-top:    math.div($size, 2);
+      padding-bottom: math.div($size, 2);
+    }
+  }
+}
+
+
+// ------------------------------------------------------------
+//  ALIGNMENT UTILITIES
+// ------------------------------------------------------------
+.text-center{
+    text-align: center;
+}
+// Vertical alignment of the whole row (cross-axis)
+.align-items-start    { align-items: flex-start;  }
+.align-items-center   { align-items: center;      }
+.align-items-end      { align-items: flex-end;    }
+.align-items-stretch  { align-items: stretch;     }
+.align-items-baseline { align-items: baseline;    }
+
+// Vertical alignment of a single column
+.align-self-start    { align-self: flex-start;  }
+.align-self-center   { align-self: center;      }
+.align-self-end      { align-self: flex-end;    }
+.align-self-stretch  { align-self: stretch;     }
+.align-self-baseline { align-self: baseline;    }
+
+// Horizontal distribution of columns (main-axis)
+.justify-content-start         { justify-content: flex-start;    }
+.justify-content-center        { justify-content: center;        }
+.justify-content-end           { justify-content: flex-end;      }
+.justify-content-between       { justify-content: space-between; }
+.justify-content-around        { justify-content: space-around;  }
+.justify-content-evenly        { justify-content: space-evenly;  }
+
+
+// ------------------------------------------------------------
+//  ORDER UTILITIES
+// ------------------------------------------------------------
+
+.order-first { order: -1;             }
+.order-last  { order: $grid-columns + 1; }
+
+@for $i from 0 through $grid-columns {
+  .order-#{$i} { order: $i; }
+}
+
+@each $bp, $value in $breakpoints {
+  @if $bp != "xs" {
+    @include respond-above($bp) {
+      .order-#{$bp}-first { order: -1; }
+      .order-#{$bp}-last  { order: $grid-columns + 1; }
+
+      @for $i from 0 through $grid-columns {
+        .order-#{$bp}-#{$i} { order: $i; }
+      }
+    }
+  }
+}
+
+
+// ------------------------------------------------------------
+//  DISPLAY HELPERS  (show / hide per breakpoint)
+// ------------------------------------------------------------
+
+@each $bp, $value in $breakpoints {
+  @if $bp == "xs" {
+    .d-none  { display: none  !important; }
+    .d-block { display: block !important; }
+    .d-flex  { display: flex  !important; }
+  } @else {
+    @include respond-above($bp) {
+      .d-#{$bp}-none  { display: none  !important; }
+      .d-#{$bp}-block { display: block !important; }
+      .d-#{$bp}-flex  { display: flex  !important; }
+    }
+  }
+}
