@@ -2387,10 +2387,16 @@ nav {
   }
   .mv-step:nth-child(2n) {
     border-right: none;
+    padding-left: 0;
+    padding-block: 0;
   }
   .mv-step:nth-child(3), .mv-step:nth-child(4) {
     border-top: 0.5px solid rgba(255, 255, 255, 0.07);
-    padding-top: 2rem;
+    padding-top: 1rem;
+    padding-left: 0;
+  }
+  .mv-ghost-num {
+    font-size: 30px;
   }
 }
 @media (max-width: 480px) {
@@ -2465,6 +2471,20 @@ nav {
   margin-bottom: 10px;
 }
 
+@media (max-width: 768px) {
+  .products-slider {
+    padding: 2rem;
+  }
+  .products-slider .swiper-button-prev,
+  .products-slider .swiper-button-next {
+    width: 40px;
+    height: 40px;
+  }
+  .products-slider .swiper-button-prev::after,
+  .products-slider .swiper-button-next::after {
+    font-size: 12px;
+  }
+}
 .cta-hero {
   text-align: center;
   padding: 80px 40px;
